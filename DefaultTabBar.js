@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   tabs: {
-    height: 50,
+    height: 45,
     flexDirection: 'row',
     justifyContent: 'space-around',
     borderWidth: 1,
