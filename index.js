@@ -236,7 +236,6 @@ const ScrollableTabView = createReactClass({
         scrollEnabled={!this.props.locked}
         directionalLockEnabled
         alwaysBounceVertical={false}
-        keyboardDismissMode="on-drag"
         {...this.props.contentProps}
       >
           {scenes}
@@ -248,7 +247,6 @@ const ScrollableTabView = createReactClass({
         style={styles.scrollableContentAndroid}
         initialPage={this.props.initialPage}
         onPageSelected={this._updateSelectedPage}
-        keyboardDismissMode="on-drag"
         scrollEnabled={!this.props.locked}
         onPageScroll={Animated.event(
           [{
