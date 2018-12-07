@@ -31,6 +31,7 @@ const ScrollableTabBar = createReactClass({
     renderTab: PropTypes.func,
     underlineStyle: ViewPropTypes.style,
     onScroll: PropTypes.func,
+    boldActiveTab: PropTypes.bool,
   },
 
   getDefaultProps() {
@@ -127,7 +128,7 @@ const ScrollableTabBar = createReactClass({
   renderTab(name, page, isTabActive, onPressHandler, onLayoutHandler) {
     const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
-    const fontWeight = 'normal';
+    const fontWeight = this.props.boldActiveTab && isTabActive ? 'bold' : 'normal';
 
     return <Button
       key={`${name}_${page}`}
