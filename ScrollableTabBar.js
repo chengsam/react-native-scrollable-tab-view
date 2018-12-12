@@ -14,6 +14,7 @@ const {
 const Button = require('./Button');
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
+const BUTTON_PADDING = 20;
 
 const ScrollableTabBar = createReactClass({
   propTypes: {
@@ -32,6 +33,7 @@ const ScrollableTabBar = createReactClass({
     underlineStyle: ViewPropTypes.style,
     onScroll: PropTypes.func,
     boldActiveTab: PropTypes.bool,
+    addTabMargin: PropTypes.bool,
   },
 
   getDefaultProps() {
@@ -44,6 +46,7 @@ const ScrollableTabBar = createReactClass({
       tabStyle: {},
       tabsContainerStyle: {},
       underlineStyle: {},
+      addTabMargin: true,
     };
   },
 
@@ -107,6 +110,8 @@ const ScrollableTabBar = createReactClass({
   },
 
   updateTabUnderline(position, pageOffset, tabCount) {
+    const { addTabMargin, } = this.props;
+
     const lineLeft = this._tabsMeasurements[position].left;
     const lineRight = this._tabsMeasurements[position].right;
 
@@ -117,11 +122,11 @@ const ScrollableTabBar = createReactClass({
       const newLineLeft = (pageOffset * nextTabLeft + (1 - pageOffset) * lineLeft);
       const newLineRight = (pageOffset * nextTabRight + (1 - pageOffset) * lineRight);
 
-      this.state._leftTabUnderline.setValue(newLineLeft);
-      this.state._widthTabUnderline.setValue(newLineRight - newLineLeft);
+      this.state._leftTabUnderline.setValue(newLineLeft + addTabMargin ? 0 : BUTTON_PADDING);
+      this.state._widthTabUnderline.setValue(newLineRight - newLineLeft - addTabMargin ? 0 : BUTTON_PADDING * 2);
     } else {
-      this.state._leftTabUnderline.setValue(lineLeft);
-      this.state._widthTabUnderline.setValue(lineRight - lineLeft);
+      this.state._leftTabUnderline.setValue(lineLeft + addTabMargin ? 0 : BUTTON_PADDING);
+      this.state._widthTabUnderline.setValue(lineRight - lineLeft - addTabMargin ? 0 : BUTTON_PADDING * 2);
     }
   },
 
@@ -224,8 +229,8 @@ const styles = StyleSheet.create({
     height: 44,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: BUTTON_PADDING,
+    paddingRight: BUTTON_PADDING,
   },
   container: {
     height: 45,
