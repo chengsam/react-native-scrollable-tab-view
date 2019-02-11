@@ -43,7 +43,6 @@ const ScrollableTabView = createReactClass({
     scrollWithoutAnimation: PropTypes.bool,
     locked: PropTypes.bool,
     prerenderingSiblingsNumber: PropTypes.number,
-    boldActiveTab: PropTypes.bool,
   },
 
   getDefaultProps() {
@@ -57,7 +56,6 @@ const ScrollableTabView = createReactClass({
       scrollWithoutAnimation: false,
       locked: false,
       prerenderingSiblingsNumber: 0,
-      boldActiveTab: true,
     };
   },
 
@@ -371,14 +369,14 @@ const ScrollableTabView = createReactClass({
     if (this.props.tabBarInactiveTextColor) {
       tabBarProps.inactiveTextColor = this.props.tabBarInactiveTextColor;
     }
-    if (this.props.tabBarTextStyle) {
-      tabBarProps.textStyle = this.props.tabBarTextStyle;
+    if (this.props.tabBarActiveTextStyle) {
+      tabBarProps.activeTextStyle = this.props.tabBarActiveTextStyle;
+    }
+    if (this.props.tabBarInactiveTextStyle) {
+      tabBarProps.inactiveTextStyle = this.props.tabBarInactiveTextStyle;
     }
     if (this.props.tabBarUnderlineStyle) {
       tabBarProps.underlineStyle = this.props.tabBarUnderlineStyle;
-    }
-    if (this.props.boldActiveTab) {
-      tabBarProps.boldActiveTab = this.props.boldActiveTab;
     }
     if (overlayTabs) {
       tabBarProps.style = {

@@ -28,11 +28,11 @@ const ScrollableTabBar = createReactClass({
     style: ViewPropTypes.style,
     tabStyle: ViewPropTypes.style,
     tabsContainerStyle: ViewPropTypes.style,
-    textStyle: Text.propTypes.style,
+    activeTextStyle: Text.propTypes.style,
+    inactiveTextStyle: Text.propTypes.style,
     renderTab: PropTypes.func,
     underlineStyle: ViewPropTypes.style,
     onScroll: PropTypes.func,
-    boldActiveTab: PropTypes.bool,
     addTabMargin: PropTypes.bool,
   },
 
@@ -131,9 +131,9 @@ const ScrollableTabBar = createReactClass({
   },
 
   renderTab(name, page, isTabActive, onPressHandler, onLayoutHandler) {
-    const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
+    const { activeTextColor, inactiveTextColor, activeTextStyle, inactiveTextStyle, } = this.props;
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
-    const fontWeight = this.props.boldActiveTab && isTabActive ? 'bold' : 'normal';
+    const textStyle = isTabActive ? activeTextStyle : inactiveTextStyle;
 
     return <Button
       key={`${name}_${page}`}
@@ -144,7 +144,7 @@ const ScrollableTabBar = createReactClass({
       onLayout={onLayoutHandler}
     >
       <View style={[styles.tab, this.props.tabStyle, ]}>
-        <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
+        <Text style={[{color: textColor, }, textStyle, ]}>
           {name}
         </Text>
       </View>
